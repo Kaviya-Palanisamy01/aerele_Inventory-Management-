@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Inventory Report - Inventory Management System{% endblock %}
+
+{% block content %}
+<h1>Inventory Report</h1>
+<p>Current stock balance across all locations</p>
+
+<p>
+    <a href="{{ url_for('api_balance') }}" target="_blank" class="btn">Export JSON</a>
+</p>
+
+<div class="card">
+    <h3>Stock Balance by Location</h3>
+    
+    {% if report_data %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Location</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in report_data %}
+                <tr>
+                    <td>
+                        {{ item.product.name if item.product else 'Unknown Product' }}<br>
+                        ID: {{ item.product.product_id if item.product else 'N/A' }}
+                    </td>
+                    <td>
+                        {{ item.location.name if item.location else 'Unknown Location' }}<br>
+                        ID: {{ item.location.location_id if item.location else 'N/A' }}
+                    </td>
+                    <td><strong>{{ item.qty }}</strong></td>
+                    <td>
+                        {% if item.qty > 10 %}
+                            <span class="badge badge-success">In Stock</span>
+                        {% elif item.qty > 0 %}
+                            <span class="badge badge-warning">Low Stock</span>
+                        {% else %}
+                            <span class="badge badge-danger">Out of Stock</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Summary Statistics -->
+        <div class="card">
+            <h3>Summary</h3>
+            <table>
+            <tr>
+                <td>Items in Stock:</td>
+                <td>{{ report_data|selectattr('qty', 'gt', 0)|list|length }}</td>
+            </tr>
+            <tr>
+                <td>Low Stock Items:</td>
+                <td>{{ report_data|selectattr('qty', 'le', 10)|selectattr('qty', 'gt', 0)|list|length }}</td>
+            </tr>
+            <tr>
+                <td>Out of Stock:</td>
+                <td>{{ report_data|selectattr('qty', 'le', 0)|list|length }}</td>
+            </tr>
+            </table>
+        </div>
+        
+    {% else %}
+        <div class="empty-state">
+            <h3>No Inventory Data</h3>
+            <p>No stock movements have been recorded yet. Start by recording some inventory movements to see the balance report.</p>
+            <a href="{{ url_for('add_movement') }}" class="btn btn-success">Record First Movement</a>
+        </div>
+    {% endif %}
+</div>
+
+{% if report_data %}
+<div class="card">
+    <h3>Report Information</h3>
+    <p><strong>Report Generated:</strong> {{ current_time.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    <p><strong>Total Entries:</strong> {{ report_data|length }}</p>
+    <p><strong>Note:</strong> This report shows current stock balance based on all recorded movements. Negative quantities indicate more items were moved out than moved in.</p>
+</div>
+{% endif %}
+{% endblock %}

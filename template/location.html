@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Locations</h2>
+<form method="POST">
+    Location ID: <input type="text" name="location_id" required>
+    Name: <input type="text" name="name" required>
+    <button type="submit">Add Location</button>
+</form>
+<br>
+<table>
+    <tr><th>ID</th><th>Name</th></tr>
+    {% for l in locations %}
+    <tr><td>{{ l.location_id }}</td><td>{{ l.name }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

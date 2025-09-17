@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Product - Inventory Management System{% endblock %}
+
+{% block content %}
+<h1>{{ action }} Product</h1>
+<p>{{ "Update product information" if product else "Add a new product to your inventory" }}</p>
+
+<p>
+    <a href="{{ url_for('products') }}" class="btn btn-secondary">Back to Products</a>
+</p>
+
+<form method="POST">
+    <label for="product_id">Product ID *</label>
+    <input type="text" 
+           id="product_id" 
+           name="product_id" 
+           value="{{ product.product_id if product else '' }}"
+           {{ 'readonly' if product else '' }}
+           required
+           placeholder="Enter unique product ID (e.g., PROD001)">
+    <small>{{ "Product ID cannot be changed after creation" if product else "Use a unique identifier for this product" }}</small>
+
+    <label for="name">Product Name *</label>
+    <input type="text" 
+           id="name" 
+           name="name" 
+           value="{{ product.name if product else '' }}"
+           required
+           placeholder="Enter product name">
+
+    <label for="description">Description</label>
+    <textarea id="description" 
+              name="description" 
+              rows="3"
+              placeholder="Enter product description (optional)">{{ product.description if product else '' }}</textarea>
+
+    <label for="quantity">Initial Quantity *</label>
+    <input type="number" 
+           id="quantity" 
+           name="quantity" 
+           value="{{ product.quantity if product else '0' }}"
+           min="0"
+           required
+           placeholder="Enter initial quantity">
+    <small>Set the initial stock quantity for this product</small>
+
+    <p>
+        <a href="{{ url_for('products') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-success">{{ action }} Product</button>
+    </p>
+</form>
+{% endblock %}

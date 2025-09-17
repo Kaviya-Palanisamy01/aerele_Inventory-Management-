@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Products</h2>
+<form method="POST">
+    Product ID: <input type="text" name="product_id" required>
+    Name: <input type="text" name="name" required>
+    <button type="submit">Add Product</button>
+</form>
+<br>
+<table>
+    <tr><th>ID</th><th>Name</th></tr>
+    {% for p in products %}
+    <tr><td>{{ p.product_id }}</td><td>{{ p.name }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Location - Inventory Management System{% endblock %}
+
+{% block content %}
+<h1>{{ action }} Location</h1>
+<p>{{ "Update location information" if location else "Add a new location to your inventory" }}</p>
+
+<p>
+    <a href="{{ url_for('locations') }}" class="btn btn-secondary">Back to Locations</a>
+</p>
+
+<form method="POST">
+    <label for="location_id">Location ID *</label>
+    <input type="text" 
+           id="location_id" 
+           name="location_id" 
+           value="{{ location.location_id if location else '' }}"
+           {{ 'readonly' if location else '' }}
+           required
+           placeholder="Enter unique location ID (e.g., WH001)">
+    <small>{{ "Location ID cannot be changed after creation" if location else "Use a unique identifier for this location" }}</small>
+
+    <label for="name">Location Name *</label>
+    <input type="text" 
+           id="name" 
+           name="name" 
+           value="{{ location.name if location else '' }}"
+           required
+           placeholder="Enter location name">
+
+    <label for="address">Address</label>
+    <textarea id="address" 
+              name="address" 
+              rows="3"
+              placeholder="Enter location address (optional)">{{ location.address if location else '' }}</textarea>
+
+    <p>
+        <a href="{{ url_for('locations') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-success">{{ action }} Location</button>
+    </p>
+</form>
+{% endblock %}
