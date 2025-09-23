@@ -8,8 +8,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+    color: #1f2937;
+    background-color: #f3f5f9; /* softer neutral background */
 }
 
 .container {
@@ -18,12 +18,12 @@ body {
     padding: 0 20px;
 }
 
-/* Header and Navigation */
+/* Header and Navigation - light and minimal */
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: #ffffff;
+    color: #111827;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eaeef5;
 }
 
 .header-content {
@@ -41,20 +41,20 @@ header {
 nav ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
 nav a {
-    color: white;
+    color: #374151;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 nav a:hover {
-    background-color: rgba(255,255,255,0.2);
+    background-color: #f3f4f6;
 }
 
 /* Main Content */
@@ -63,16 +63,70 @@ main {
     min-height: calc(100vh - 140px);
 }
 
-h1 {
-    color: #2c3e50;
+/* Sidebar Layout (to match light dashboard look) */
+.layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+}
+
+.sidebar {
+    background: #ecf7f3; /* light mint-tinted sidebar */
+    border-right: 1px solid #e6eef5;
+    min-height: 100vh;
+    padding: 1rem 1rem;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: #0f766e;
     margin-bottom: 1rem;
-    font-size: 2.5rem;
-    font-weight: 300;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.sidebar nav a {
+    display: block;
+    text-decoration: none;
+    color: #334155;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+}
+
+.sidebar nav a:hover {
+    background: #e6f5f0;
+}
+
+.sidebar nav a.active {
+    background: #d9f7ea;
+    color: #0f766e;
+    font-weight: 600;
+}
+
+.content {
+    padding: 1.25rem 1.5rem;
+}
+
+h1 {
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 h2, h3 {
-    color: #34495e;
-    margin-bottom: 1rem;
+    color: #374151;
+    margin-bottom: 0.75rem;
 }
 
 p {
@@ -82,13 +136,36 @@ p {
 
 /* Cards */
 .card {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    border: 1px solid #e9ecef;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    border: 1px solid #eaeef5;
 }
+
+/* Page header + breadcrumbs */
+.page-head {
+    margin-bottom: 1rem;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.breadcrumb a {
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover { text-decoration: underline; }
+
+.breadcrumb .sep { color: #cbd5e1; }
 
 .card h3 {
     color: #495057;
@@ -100,85 +177,98 @@ p {
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
 }
 
 .stat-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 2rem;
-    border-radius: 10px;
+    background: #ffffff;
+    color: #1f2937;
+    padding: 1.25rem;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    border: 1px solid #eaeef5;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
 }
 
 .stat-card h3 {
-    color: white;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    opacity: 0.9;
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+    font-weight: 500;
 }
 
 .stat-card h2 {
-    color: white;
-    font-size: 2.5rem;
-    font-weight: 600;
+    color: #111827;
+    font-size: 2.2rem;
+    font-weight: 700;
     margin: 0;
 }
 
 /* Buttons */
 .btn {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #667eea;
-    color: white;
+    padding: 0.6rem 1.1rem;
+    background: #86efac; /* mint */
+    color: #065f46;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 9999px; /* pill */
     border: none;
     cursor: pointer;
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
 .btn:hover {
-    background: #5a67d8;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    background: #34d399;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.18);
 }
 
 .btn-success {
-    background: #48bb78;
+    background: #86efac;
+    color: #065f46;
 }
 
 .btn-success:hover {
-    background: #38a169;
+    background: #34d399;
 }
 
 .btn-warning {
-    background: #ed8936;
+    background: #fde68a;
+    color: #92400e;
 }
 
 .btn-warning:hover {
-    background: #dd7724;
+    background: #fbbf24;
 }
 
 .btn-danger {
-    background: #f56565;
+    background: #fecaca;
+    color: #7f1d1d;
 }
 
 .btn-danger:hover {
-    background: #e53e3e;
+    background: #f87171;
+    color: #7f1d1d;
 }
 
 .btn-secondary {
-    background: #718096;
+    background: #e5e7eb;
+    color: #374151;
 }
 
 .btn-secondary:hover {
-    background: #4a5568;
+    background: #d1d5db;
+}
+
+/* Quick actions group */
+.btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 /* Forms */
@@ -383,7 +473,7 @@ tr:last-child td {
 .d-inline-block { display: inline-block; }
 .d-block { display: block; }
 
-/* Footer */
+
 footer {
     background: #2d3748;
     color: white;
@@ -391,3 +481,4 @@ footer {
     padding: 1rem 0;
     margin-top: 2rem;
 }
+
